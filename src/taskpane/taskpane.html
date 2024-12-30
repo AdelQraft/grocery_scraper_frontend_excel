@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Grocery Scraper Task Pane Add-in</title>
+
+	<!-- Office JavaScript API -->
+	<script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+	<link href="taskpane.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<header class="gs-header">
+		<img width="90" height="90" src="../../asset/logo.png" alt="Grocery Scraper" title="Grocery Scraper">
+		<h1 class="">Configuration</h1>
+	</header>
+	<main class="gs-main" style="display: flex;">
+		<ul class="gs-features">
+			<li class="gs-ListItem">
+				<ul>
+					<li class="gs-ListItem" style="padding-top: 0; padding-bottom: 0;">
+						<div class="gs-FieldOption" style="width:300px">
+							<label class="gs-Label">Refresh period (in seconds)</label>
+							<input class="gs-FieldOption-field" id="refresh-period-txt-field" type="number" style="width: 90px">
+						</div>
+					</li>
+					<li class="gs-ListItem">
+						<div class="gs-CheckBoxOption">
+							<input class="gs-CheckBoxOption-field" id="save-refresh-period-to-wb-chk-bx" type="checkbox">
+							<label class="gs-Label">Save refresh period to workbook</label>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</main>
+</body>
+
+</html>

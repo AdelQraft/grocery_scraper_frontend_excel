@@ -1,0 +1,6 @@
+/package-lock.json
+/.manifest_generated.xml
+/.env.prod
+/.env.dev
+/.idea/
+/.vscode/
