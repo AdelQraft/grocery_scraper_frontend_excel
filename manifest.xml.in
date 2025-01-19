@@ -9,7 +9,6 @@
 	<AppDomains>
 		<AppDomain>${BACKEND_URL}</AppDomain>
 	</AppDomains>
-	<IconUrl DefaultValue="${FRONTEND_URL}/assets/icon/32.png"/>
 	<HighResolutionIconUrl DefaultValue="${FRONTEND_URL}/assets/icon/64.png"/>
 	<Hosts>
 		<Host Name="Workbook"/>

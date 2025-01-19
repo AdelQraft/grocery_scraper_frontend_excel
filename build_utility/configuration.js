@@ -18,7 +18,7 @@ function configure(content) {
 module.exports = { configure };
 
 if (require.main === module) {
-	const HELP_MSG = `usage: ${process.argv[0]} ${process.argv[1]} [input file path] [output file path] [options]\n\noptions:\n\t-p                                          use production environment file instead of the dev one\n\t--help,                                     display this help message`;
+	const HELP_MSG = `usage: ${process.argv[0]} ${process.argv[1]} [input file path] [output file path] [options]\n\noptions:\n\t-p                                          use production environment file instead of the development one\n\t--help,                                     display this help message`;
 
 	let envFilePath;
 	switch (process.argv.length) {

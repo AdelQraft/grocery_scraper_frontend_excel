@@ -7,6 +7,8 @@
 	},
 	"license": "MIT",
 	"scripts": {
+		"generate-manifest": "node build_utility/configuration.js manifest.xml.in .manifest_production_generated.xml -p",
+		"generate-manifest:dev": "node build_utility/configuration.js manifest.xml.in .manifest_debug_generated.xml",
 		"build": "webpack --mode production",
 		"build:dev": "webpack --mode development",
 		"dev-server": "webpack serve --mode development",
@@ -16,11 +18,11 @@
 		"prettier": "office-addin-lint prettier",
 		"signin": "office-addin-dev-settings m365-account login",
 		"signout": "office-addin-dev-settings m365-account logout",
-		"start": "node build_utility/configuration.js manifest.xml.in .manifest_generated.xml && office-addin-debugging start .manifest_generated.xml",
-		"start:desktop": "node build_utility/configuration.js manifest.xml.in .manifest_generated.xml && office-addin-debugging start .manifest_generated.xml desktop",
-		"start:web": "node build_utility/configuration.js manifest.xml.in .manifest_generated.xml && office-addin-debugging start .manifest_generated.xml web",
-		"stop": "node build_utility/configuration.js manifest.xml.in .manifest_generated.xml && office-addin-debugging stop .manifest_generated.xml",
-		"validate": "node build_utility/configuration.js manifest.xml.in .manifest_generated.xml && office-addin-manifest validate .manifest_generated.xml",
+		"start": "npm run generate-manifest:dev && office-addin-debugging start .manifest_debug_generated.xml",
+		"start:desktop": "npm run generate-manifest:dev && office-addin-debugging start .manifest_debug_generated.xml desktop",
+		"start:web": "npm run generate-manifest:dev && office-addin-debugging start .manifest_debug_generated.xml web",
+		"stop": "npm run generate-manifest:dev && office-addin-debugging stop .manifest_debug_generated.xml",
+		"validate": "npm run generate-manifest:dev && office-addin-manifest validate .manifest_debug_generated.xml",
 		"watch": "webpack --mode development --watch"
 	},
 	"dependencies": {

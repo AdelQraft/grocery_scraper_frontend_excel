@@ -1,5 +1,6 @@
 /package-lock.json
-/.manifest_generated.xml
+/.manifest_debug_generated.xml
+/.manifest_production_generated.xml
 /.env.prod
 /.env.dev
 /.idea/
