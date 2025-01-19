@@ -10,7 +10,8 @@ const ExcelFunctionError  = {
 	NOT_AVAILABLE: new CustomFunctions.Error(CustomFunctions.ErrorCode.notAvailable)
 }
 
-const storeNameToDefaultLocale = {
+/*
+const storeNameToDefaultLocaleName = {
 	"metro-canada": "en-CA"
 }
 
@@ -18,6 +19,7 @@ const hostnameToStoreName = {
 	"metro.ca": "metro-canada",
 	"www.metro.ca": "metro-canada"
 }
+*/
 
 const INFO_PARAM_NAME_ALLOWED_VALUES = new Set(["name", "url", "price-in-local-currency-slc", "count-id", "mass-g", "volume-L", "protein-mass-g", "energy-Cal"])
 function singleInfoIsValid(singleInfo: string) {
