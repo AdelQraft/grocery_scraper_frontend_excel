@@ -22,7 +22,8 @@
 		"start:desktop": "npm run generate-manifest:dev && office-addin-debugging start .manifest_debug_generated.xml desktop",
 		"start:web": "npm run generate-manifest:dev && office-addin-debugging start .manifest_debug_generated.xml web",
 		"stop": "npm run generate-manifest:dev && office-addin-debugging stop .manifest_debug_generated.xml",
-		"validate": "npm run generate-manifest:dev && office-addin-manifest validate .manifest_debug_generated.xml",
+		"validate": "npm run generate-manifest && office-addin-manifest validate .manifest_production_generated.xml",
+		"validate:dev": "npm run generate-manifest:dev && office-addin-manifest validate .manifest_debug_generated.xml",
 		"watch": "webpack --mode development --watch"
 	},
 	"dependencies": {
