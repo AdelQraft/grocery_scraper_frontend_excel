@@ -1,0 +1,17 @@
+name: Publish Docker Image to GHCR
+
+on:
+  push
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and Publish the Docker Image
+        run:
+          docker login -u AdelQraft -p ${{secrets.GH_PAT}} ghcr.io &&
+          npm i &&
+          npm dockerBuild &&
+          docker push $(docker images | grep 'ghcr.io/adelqraft/grocery_scraper_frontend_excel' | awk '{print $1 ":" $2}')

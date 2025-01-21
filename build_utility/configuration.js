@@ -1,15 +1,27 @@
-#!/bin/env node
+#!/usr/bin/env node
+
+/* eslint-disable */
 
 function configure(content) {
+	const encounteredKeys = new Set()
+
 	return content.toString().replace(
 		/\${(.*?)}/g,
 		(match) => {
-			const varName = match.substring(2, match.length - 1);
-			const value = process.env[varName];
+			const key = match.substring(2, match.length - 1);
+			const value = process.env[key];
+
+			let hasKey = encounteredKeys.has(key)
+			encounteredKeys.add(key);
+
 			if (value === undefined || value === "") {
-				console.warn(`warning: environment variable "${varName}" is empty or not defined`);
+				if (!hasKey) {
+					console.warn(`warning: environment variable with key "${key}" is empty or undefined`);
+				}
+
 				return "";
 			}
+
 			return value;
 		}
 	);
@@ -18,35 +30,26 @@ function configure(content) {
 module.exports = { configure };
 
 if (require.main === module) {
-	const HELP_MSG = `usage: ${process.argv[0]} ${process.argv[1]} [input file path] [output file path] [options]\n\noptions:\n\t-p                                          use production environment file instead of the development one\n\t--help,                                     display this help message`;
+	const HELP_MSG = `usage: ${process.argv[0]} ${process.argv[1]} [input file path] [output file path] [options]\n\noptions:\n\t--help                                      display this help message`;
 
-	let envFilePath;
 	switch (process.argv.length) {
-		case 4: {
+		case 3: {
 			if (process.argv[2] === "--help") {
 				console.log(HELP_MSG);
-				return;
+				process.exit(0)
 			}
-			envFilePath = `${__dirname}/../.env.dev`;
+			else {
+				console.error(HELP_MSG);
+				process.exit(1)
+			}
 		} break;
-		case 5: {
-			switch (process.argv[4]) {
-				case "-p": {
-					envFilePath = `${__dirname}/../.env.prod`;
-				} break;
-				default: {
-					console.error(HELP_MSG);
-					return;
-				} break;
-			} break;
-		}
+		case 4: break;
 		default: {
 			console.error(HELP_MSG);
-			return;
-		} break;
+			process.exit(1)
+		}
 	}
 
-	require("../node_modules/dotenv").config({ path: envFilePath });
 	const fs = require("node:fs");
 	fs.writeFileSync(process.argv[3], configure(fs.readFileSync(process.argv[2])));
 }

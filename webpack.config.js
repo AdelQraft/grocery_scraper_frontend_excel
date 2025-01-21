@@ -6,6 +6,7 @@ const devCerts = require("office-addin-dev-certs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const {resolve} = require("node:path");
 
 async function getHttpsOptions() {
 	const httpsOptions = await devCerts.getHttpsServerOptions();
@@ -18,6 +19,8 @@ module.exports = async (env, options) => {
 
 	const DotenvWebpackPlugin = require("dotenv-webpack");
 
+	const distDir = resolve(__dirname, process.env.DIST_DIR);
+
 	return {
 		devtool: "source-map",
 		entry: {
@@ -28,6 +31,7 @@ module.exports = async (env, options) => {
 		},
 		output: {
 			clean: true,
+			path: distDir
 		},
 		resolve: {
 			extensions: [".ts", ".html", ".js"],

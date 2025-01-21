@@ -1,8 +1,9 @@
 /package-lock.json
-/.manifest_debug_generated.xml
-/.manifest_production_generated.xml
+/.manifest_dev_generated.xml
+/.manifest_prod_generated.xml
 /.env.prod
 /.env.dev
 /.idea/
 /.vscode/
 /dist/
+/.manifest_prod_original_generated.xml.tmp

@@ -1,0 +1,12 @@
+# Docker shouldn't be called on this file directly. Use npm to build the docker container.
+
+FROM nginx:alpine
+
+ARG DIST_DIR
+ARG TEMPLATE_DIST_DIR
+
+COPY "${DIST_DIR}" "/usr/share/nginx/html"
+COPY "${TEMPLATE_DIST_DIR}" "/etc/grocery_scraper_frontend_excel/template"
+
+COPY "docker_container_utility/set_office_add_in_property.sh" "/usr/local/bin/set-office-add-in-property-url"
+RUN ["chmod", "+x", "/usr/local/bin/set-office-add-in-property-url"]
