@@ -13,7 +13,7 @@
 		"dev-server": "webpack serve --mode development",
 		"docker-build": "npm run build && dotenv -e .env.prod -v DIST_DIR=.$DIST_DIR_template.tmp -v FRONTEND_URL=PLACEHOLDER___FRONTEND_URL___PLACEHOLDER -v BACKEND_URL=PLACEHOLDER___BACKEND_URL___PLACEHOLDER -- npm run build && dotenv -e .env.prod -- cross-var echo docker build -t $DOCKER_IMAGE_NAME:$VERSION -f build.docker --build-arg DIST_DIR=$DIST_DIR --build-arg TEMPLATE_DIST_DIR=.$dist_prod_template.tmp . && rimraf .dist_prod_template.tmp",
 		"docker-force-remove": "npm run docker-stop && dotenv -e .env.prod -- cross-var node build_utility/ignore_exit_value.js docker container rm $DOCKER_CONTAINER_NAME",
-		"docker-recreate": "npm run docker-build && npm run docker-force-remove && dotenv -e .env.prod -- cross-var docker container create -i -t -p $DOCKER_HTTP_PORT:80 --name $DOCKER_CONTAINER_NAME $DOCKER_IMAGE_NAME:$VERSION",
+		"docker-recreate": "npm run docker-build && npm run docker-force-remove && dotenv -e .env.prod -- cross-var docker container create -i -t -p $DOCKER_HTTP_PORT:80 --name $DOCKER_CONTAINER_NAME %DOCKER_IMAGE_NAME%:%VERSION%",
 		"docker-rerun": "npm run docker-recreate && dotenv -e .env.prod -- cross-var docker container restart $DOCKER_CONTAINER_NAME",
 		"docker-stop": "dotenv -e .env.prod -- cross-var node build_utility/ignore_exit_value.js docker container stop $DOCKER_CONTAINER_NAME",
 		"generate-manifest": "dotenv -e .env.prod -- node build_utility/configuration.js manifest.xml.in .manifest_prod_generated.xml",
