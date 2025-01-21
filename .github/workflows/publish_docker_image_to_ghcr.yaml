@@ -13,5 +13,5 @@ jobs:
         run:
           docker login -u AdelQraft -p ${{secrets.GH_PAT}} ghcr.io &&
           npm i &&
-          npm dockerBuild &&
+          npm docker-build &&
           docker push $(docker images | grep 'ghcr.io/adelqraft/grocery_scraper_frontend_excel' | awk '{print $1 ":" $2}')
