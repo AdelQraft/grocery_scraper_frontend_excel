@@ -12,7 +12,7 @@ jobs:
       - name: Build and Publish the Docker Image
         run:
           docker login -u AdelQraft -p ${{secrets.GH_PAT}} ghcr.io &&
-          cp .env.prod.template .env.prod &&
+          cp ./.env.prod.template ./.env.prod &&
           npm i &&
           npm run docker-build &&
           docker push $(docker images | grep 'ghcr.io/adelqraft/grocery_scraper_frontend_excel' | awk '{print $1 ":" $2}')
