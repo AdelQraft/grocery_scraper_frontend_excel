@@ -1,4 +1,4 @@
-# Docker shouldn't be called on this file directly. Use npm to build the docker container.
+# Docker build shouldn't be called on this file directly. Use npm to build the docker container.
 
 FROM nginx:alpine
 
