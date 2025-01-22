@@ -1,0 +1,25 @@
+name: Publish the Excel Frontend Application as to GitHub Pages
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the Excel Frontend Application
+        run:
+          cp ./.env.prod.template ./.env.prod &&
+          npm i &&
+          npm run docker-build
+
+      - name: Push the Docker Image to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+        with:
+          dir: dist_prod
+          branch: production-deployment
+          token: ${{secrets.GH_REPOS_PAT}}
