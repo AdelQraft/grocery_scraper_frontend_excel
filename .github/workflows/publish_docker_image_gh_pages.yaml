@@ -15,7 +15,7 @@ jobs:
         run:
           cp ./.env.prod.template ./.env.prod &&
           npm i &&
-          npm run docker-build
+          npm run build
 
       - name: Push the Docker Image to GitHub Pages
         uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
