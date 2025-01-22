@@ -1,7 +1,9 @@
-name: Publish Docker Image to GHCR
+name: Publish the Excel Frontend Application as Docker Image to GHCR
 
 on:
-  push
+  push:
+    branches:
+      - production
 
 jobs:
   build_and_publish:
@@ -9,10 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build and Publish the Docker Image
+      - name: Login to GHCR
         run:
-          docker login -u AdelQraft -p ${{secrets.GH_PAT}} ghcr.io &&
+          docker login -u AdelQraft -p ${{secrets.GH_PACKAGE_PAT}} ghcr.io
+
+      - name: Build the Excel Frontend Application
+        run:
           cp ./.env.prod.template ./.env.prod &&
           npm i &&
-          npm run docker-build &&
+          npm run docker-build
+
+      - name: Push the Docker Image to GHCR
+        run:
           docker push $(docker images | grep 'ghcr.io/adelqraft/grocery_scraper_frontend_excel' | awk '{print $1 ":" $2}')
