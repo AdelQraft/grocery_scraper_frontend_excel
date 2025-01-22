@@ -1,52 +1,55 @@
+import {Functions} from "../function/functions";
+import {Environment} from "../environment";
+
 const DEFAULT_REFRESH_PERIOD_S = 600
 
-let refreshPeriodTextField: HTMLInputElement;
-let saveRefreshPeriodToWBChkBx: HTMLInputElement;
+let _refreshPeriodTextField: HTMLInputElement
+let _saveRefreshPeriodToWBChkBx: HTMLInputElement
 
-function refreshPeriod_s() {
-	return refreshPeriodTextField.value;
-}
+Office.onReady(async () => {
+	await Office.addin.setStartupBehavior(Office.StartupBehavior.load)
+	await Office.addin.onVisibilityModeChanged(officeAddInOnVisibilityChanged)
 
-module.exports = { refreshPeriod_s };
+	_refreshPeriodTextField = <HTMLInputElement>document.getElementById("refresh-period-txt-field")
+	_saveRefreshPeriodToWBChkBx = <HTMLInputElement>document.getElementById("save-refresh-period-to-wb-chk-bx")
 
-Office.onReady(() => {
-	refreshPeriodTextField = <HTMLInputElement>document.getElementById("refresh-period-txt-field");
-	saveRefreshPeriodToWBChkBx = <HTMLInputElement>document.getElementById("save-refresh-period-to-wb-chk-bx");
+	await Environment.getInstancePromise().then((env) => {
+		Functions.instance.backendUrl = env.backendUrl
+	})
+	Functions.instance.refreshPeriod_s = () => parseInt(_refreshPeriodTextField.value)
 
-	Excel.run(async (_) => {
-		const exists = await excelLoadGroceryScraperRefreshPeriod();
-		if (!exists) refreshPeriodTextField.value = String(DEFAULT_REFRESH_PERIOD_S);
-	});
-});
+	await Excel.run(async (_) => {
+		const exists = await excelLoadGroceryScraperRefreshPeriod()
+		if (!exists) _refreshPeriodTextField.value = DEFAULT_REFRESH_PERIOD_S.toString()
+	})
+})
 
-Office.addin.setStartupBehavior(Office.StartupBehavior.load);
-
-async function excelLoadGroceryScraperRefreshPeriod(): Promise<Boolean> {
-	const refreshPeriod_s = Office.context.document.settings.get("groceryScraperRefreshPeriod");
-	const exists = refreshPeriod_s !== null;
-	if (exists) {
-		refreshPeriodTextField.value = refreshPeriod_s;
-		saveRefreshPeriodToWBChkBx.checked = true;
-	}
-	return exists;
-}
-
-Office.addin.onVisibilityModeChanged(async (msg: Office.VisibilityModeChangedMessage) => {
+async function officeAddInOnVisibilityChanged(msg: Office.VisibilityModeChangedMessage) {
 	await Excel.run(async (_) => {
 		if (msg.visibilityMode == "Taskpane") {
 			await excelLoadGroceryScraperRefreshPeriod()
 		} else {
-			if (saveRefreshPeriodToWBChkBx.checked) {
+			if (_saveRefreshPeriodToWBChkBx.checked) {
 				Office.context.document.settings.set(
 					"groceryScraperRefreshPeriod",
-					refreshPeriodTextField.value !== null && refreshPeriodTextField.value !== undefined
-						? Number(refreshPeriodTextField.value)
+					_refreshPeriodTextField.value !== null && _refreshPeriodTextField.value !== undefined
+						? parseInt(_refreshPeriodTextField.value)
 						: 0
-				);
+				)
 			} else {
-				Office.context.document.settings.remove("groceryScraperRefreshPeriod");
+				Office.context.document.settings.remove("groceryScraperRefreshPeriod")
 			}
 			Office.context.document.settings.saveAsync()
 		}
-	});
-});
+	})
+}
+
+async function excelLoadGroceryScraperRefreshPeriod(): Promise<Boolean> {
+	const refreshPeriod_s = Office.context.document.settings.get("groceryScraperRefreshPeriod")
+	const exists = refreshPeriod_s !== null
+	if (exists) {
+		_refreshPeriodTextField.value = refreshPeriod_s
+		_saveRefreshPeriodToWBChkBx.checked = true
+	}
+	return exists
+}

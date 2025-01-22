@@ -11,8 +11,8 @@
 	<DefaultLocale>en-US</DefaultLocale>
 	<DisplayName DefaultValue="Grocery Scraper"/>
 	<Description DefaultValue="Grocery Scraper"/>
-	<IconUrl DefaultValue="${FRONTEND_URL}/assets/icon/32.png"/>
-	<HighResolutionIconUrl DefaultValue="${FRONTEND_URL}/assets/icon/64.png"/>
+	<IconUrl DefaultValue="${FRONTEND_URL}/asset/icon/32.png"/>
+	<HighResolutionIconUrl DefaultValue="${FRONTEND_URL}/asset/icon/64.png"/>
 	<SupportUrl DefaultValue="https://github.com/AdelQraft/grocery_scraper_frontend_excel/issues"/>
 	<AppDomains>
 		<AppDomain>${BACKEND_URL}</AppDomain>
@@ -89,9 +89,9 @@
 		</Hosts>
 		<Resources>
 			<bt:Images>
-				<bt:Image id="Icon.16x16" DefaultValue="${FRONTEND_URL}/assets/icon/16.png"/>
-				<bt:Image id="Icon.32x32" DefaultValue="${FRONTEND_URL}/assets/icon/32.png"/>
-				<bt:Image id="Icon.80x80" DefaultValue="${FRONTEND_URL}/assets/icon/80.png"/>
+				<bt:Image id="Icon.16x16" DefaultValue="${FRONTEND_URL}/asset/icon/16.png"/>
+				<bt:Image id="Icon.32x32" DefaultValue="${FRONTEND_URL}/asset/icon/32.png"/>
+				<bt:Image id="Icon.80x80" DefaultValue="${FRONTEND_URL}/asset/icon/80.png"/>
 			</bt:Images>
 			<bt:Urls>
 				<bt:Url id="Functions.Script.Url" DefaultValue="${FRONTEND_URL}/functions.js"/>
@@ -106,7 +106,7 @@
 				<bt:String id="TaskpaneButton.Label" DefaultValue="Configure Grocery Scraper"/>
 			</bt:ShortStrings>
 			<bt:LongStrings>
-				<bt:String id="GetStarted.Description" DefaultValue="Grocery Scraper add-in loaded successfully. Go to the &quot;Data&quot; tab and click the &quot;Grocery Scraper&quot; button to get started."/>
+				<bt:String id="GetStarted.Description" DefaultValue="Grocery Scraper add-in loaded successfully. Go to the &quot;Data&quot; tab and click the &quot;Configure Grocery Scraper&quot; button to get started."/>
 				<bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to show Grocery Scraper configuration pane"/>
 			</bt:LongStrings>
 		</Resources>

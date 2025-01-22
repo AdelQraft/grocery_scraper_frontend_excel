@@ -1,18 +1,18 @@
 export class ProductInfo {
-	name: String
-	url: String
-	priceInLocalCurrency_slc: Number
-	count_id: Number
-	mass_g: Number
-	volume_L: Number
-	proteinMass_g: Number
-	energy_Cal: Number
+	name: string
+	url: string
+	priceInLocalCurrency_slc: number
+	count_id: number
+	mass_g: number
+	volume_L: number
+	proteinMass_g: number
+	energy_Cal: number
 
 	constructor(src: any) {
 		Object.assign(this, src)
 	}
 
-	getQuantitativeProperty(repr: String): Number {
+	getQuantitativeProperty(repr: string): number {
 		switch (repr) {
 			case "price-in-local-currency-slc": return this.priceInLocalCurrency_slc
 			case "count-id": return this.count_id
