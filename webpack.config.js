@@ -15,11 +15,13 @@ async function getHttpsOptions() {
 }
 
 module.exports = async (env, options) => {
-	const envFilePath = options.mode === "development" ? ".env.dev" : ".env.prod"
+	const isDevMod = options.mode === "development"
+
+	const envFilePath = isDevMod ? ".env.dev" : ".env.prod"
 	require("dotenv").config({ path: envFilePath })
 
 	return {
-		devtool: options.mode === "development" ? "source-map" : false,
+		devtool: isDevMod ? "source-map" : false,
 		entry: {
 			polyfill: [
 				"core-js/stable",
@@ -87,9 +89,11 @@ module.exports = async (env, options) => {
 					},
 					{
 						from: "src/env_def.json.in",
-						to: "add-in-local/[name]",
+						to: "[name]",
 						transform(content) {
-							return configuration.configure(content)
+							const configuredContent = configuration.configure(content)
+							if (isDevMod) return configuredContent
+							return JSON.stringify(JSON.parse(configuredContent))	// return a minified version
 						}
 					}
 				]
