@@ -87,7 +87,7 @@ module.exports = async (env, options) => {
 					},
 					{
 						from: "src/env_def.json.in",
-						to: "[name]",
+						to: "add-in-local/[name]",
 						transform(content) {
 							return configuration.configure(content)
 						}

@@ -17,9 +17,9 @@ jobs:
           cp ./.env.prod.template ./.env.prod &&
           npm i &&
           mkdir gh_pages &&
-          FRONTEND_URL="https://adelqraft.github.io/grocery_scraper_frontend_excel/add-in" BACKEND_URL="https://httpbin.org/status/503" npm run build &&
+          FRONTEND_URL="https://adelqraft.github.io/grocery_scraper_frontend_excel/add-in" BACKEND_URL="https://httpbin.org/status/503" ENVIRONMENT_DEFINITION_URL="/add-in/env_def.json"  npm run build &&
           mv dist_prod gh_pages/add-in &&
-          FRONTEND_URL="https://adelqraft.github.io/grocery_scraper_frontend_excel/add-in-local" BACKEND_URL="http://localhost:8084" npm run build &&
+          FRONTEND_URL="https://adelqraft.github.io/grocery_scraper_frontend_excel/add-in-local" BACKEND_URL="http://localhost:8084" ENVIRONMENT_DEFINITION_URL="/add-in-local/env_def.json" npm run build &&
           mv dist_prod gh_pages/add-in-local
 
       - name: Push the website to GitHub Pages

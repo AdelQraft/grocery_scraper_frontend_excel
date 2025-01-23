@@ -16,7 +16,7 @@ function configure(content) {
 
 			if (value === undefined || value === "") {
 				if (!hasKey) {
-					console.warn(`warning: environment variable with key "${key}" is empty or undefined`);
+					console.warn(`warning: environment variable with key "${key}" is undefined or empty`);
 				}
 
 				return "";
