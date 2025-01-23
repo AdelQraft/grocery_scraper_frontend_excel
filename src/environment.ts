@@ -10,8 +10,6 @@ export class Environment {
 	}
 
 	static async getInstancePromise(): Promise<Environment> {
-		// @ts-ignore
-		console.log(ENVIRONMENT_DEFINITION_URL)
 		if (!this._instance) {
 			// @ts-ignore
 			await axios.get(ENVIRONMENT_DEFINITION_URL).then((resp: { data: any; }) => {
@@ -19,6 +17,7 @@ export class Environment {
 			})
 		}
 
+		console.log(Environment._instance)
 		return Environment._instance
 	}
 }
