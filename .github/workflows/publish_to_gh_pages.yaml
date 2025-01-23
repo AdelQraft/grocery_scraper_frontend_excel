@@ -22,7 +22,7 @@ jobs:
           FRONTEND_URL="https://adelqraft.github.io/grocery_scraper_frontend_excel/add-in-local" BACKEND_URL="http://localhost:8084" npm run build &&
           mv dist_prod gh_pages/add-in-local
 
-      - name: Push the Docker Image to GitHub Pages
+      - name: Push the website to GitHub Pages
         uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
         with:
           dir: gh_pages
