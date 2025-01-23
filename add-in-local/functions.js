@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkgrocery_scraper_frontend_excel=self.webpackChunkgrocery_scraper_frontend_excel||[]).push([[906],{34302:function(e,n,c){var r=c(20319);CustomFunctions.associate("GETINFOFROMURL",(function(e,n,c,s,o,t,a,u){r.a.instance.getInfoFromUrl(e,n,c,s,o,t,a,u)}))}},function(e){e(e.s=34302)}]);
