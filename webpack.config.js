@@ -17,7 +17,7 @@ async function getHttpsOptions() {
 module.exports = async (env, options) => {
 	const isDevMod = options.mode === "development"
 
-	const envFilePath = isDevMod ? ".env.dev" : ".env.prod"
+	const envFilePath = isDevMod ? "./.env.dev" : "./.env.prod"
 	require("dotenv").config({ path: envFilePath })
 
 	return {
@@ -77,18 +77,18 @@ module.exports = async (env, options) => {
 			new CopyWebpackPlugin({
 				patterns: [
 					{
-						from: "src/asset",
+						from: "./src/asset",
 						to: "asset",
 					},
 					{
-						from: "src/manifest*.xml.in",
+						from: "./src/manifest*.xml.in",
 						to: "[name]",
 						transform(content) {
 							return configuration.configure(content)
 						}
 					},
 					{
-						from: "src/env_def.json.in",
+						from: "./src/env_def.json.in",
 						to: "[name]",
 						transform(content) {
 							const configuredContent = configuration.configure(content)
