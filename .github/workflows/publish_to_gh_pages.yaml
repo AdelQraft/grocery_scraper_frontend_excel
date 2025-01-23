@@ -1,4 +1,4 @@
-name: Publish the Excel Frontend Application as to GitHub Pages
+name: Publish the Excel Frontend Application to GitHub Pages
 
 on:
   push:
