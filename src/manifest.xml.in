@@ -6,7 +6,7 @@
 	xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp"
 >
 	<Id>a0295cf5-e232-452c-a111-300701a12878</Id>
-	<Version>1.0.0.0</Version>
+	<Version>${VERSION}</Version>
 	<ProviderName>Adel Makhloufi</ProviderName>
 	<DefaultLocale>en-US</DefaultLocale>
 	<DisplayName DefaultValue="Grocery Scraper"/>
