@@ -19,7 +19,7 @@ module.exports = async (env, options) => {
 	require("dotenv").config({ path: envFilePath })
 
 	return {
-		devtool: "source-map",
+		devtool: options.mode === "development" ? "source-map" : false,
 		entry: {
 			polyfill: [
 				"core-js/stable",
