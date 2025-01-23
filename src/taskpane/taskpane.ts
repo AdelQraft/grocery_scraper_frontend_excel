@@ -13,7 +13,8 @@ Office.onReady(async () => {
 	_saveRefreshPeriodToWBChkBx = <HTMLInputElement>document.getElementById("save-refresh-period-to-wb-chk-bx")
 
 	await Office.addin.onVisibilityModeChanged(loadGroceryScraperRefreshPeriodIfNeeded)
-	_refreshPeriodTextField.onchange = onRefreshPeriodTextFieldChange
+	_refreshPeriodTextField.onchange = onRefreshPeriodTextFieldChangeOrSaveRefreshPeriodToWBChkBxChange
+	_saveRefreshPeriodToWBChkBx.onchange = onRefreshPeriodTextFieldChangeOrSaveRefreshPeriodToWBChkBxChange
 
 	await Environment.getInstancePromise().then((env) => {
 		Functions.instance.backendUrl = env.backendUrl
@@ -26,7 +27,7 @@ Office.onReady(async () => {
 	})
 })
 
-async function onRefreshPeriodTextFieldChange() {
+async function onRefreshPeriodTextFieldChangeOrSaveRefreshPeriodToWBChkBxChange() {
 	await Excel.run(async () => {
 		if (_saveRefreshPeriodToWBChkBx.checked) {
 			Office.context.document.settings.set(
