@@ -97,9 +97,10 @@ module.exports = async (env, options) => {
 				]
 			}),
 			new webpack.DefinePlugin({
-				ENVIRONMENT_DEFINITION_URL: process.env.ENVIRONMENT_DEFINITION_URL
+				ENVIRONMENT_DEFINITION_URL: JSON.stringify(process.env.ENVIRONMENT_DEFINITION_URL
 					? process.env.ENVIRONMENT_DEFINITION_URL
 					: "env_def.json"
+				)
 			})
 		],
 		devServer: {
