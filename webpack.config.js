@@ -6,6 +6,7 @@ const devCerts = require("office-addin-dev-certs")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const CustomFunctionsMetadataPlugin = require("custom-functions-metadata-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const webpack = require('webpack');
 const path = require("node:path")
 
 async function getHttpsOptions() {
@@ -92,6 +93,11 @@ module.exports = async (env, options) => {
 						}
 					}
 				]
+			}),
+			new webpack.DefinePlugin({
+				ENVIRONMENT_DEFINITION_URL: process.env.ENVIRONMENT_DEFINITION_URL
+					? process.env.ENVIRONMENT_DEFINITION_URL
+					: "env_def.json"
 			})
 		],
 		devServer: {

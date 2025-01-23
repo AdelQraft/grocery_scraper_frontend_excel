@@ -11,7 +11,8 @@ export class Environment {
 
 	static async getInstancePromise(): Promise<Environment> {
 		if (!this._instance) {
-			await axios.get("env_def.json").then((resp: { data: any; }) => {
+			// @ts-ignore
+			await axios.get(ENVIRONMENT_DEFINITION_URL).then((resp: { data: any; }) => {
 				this._instance = new Environment(resp.data)
 			})
 		}
