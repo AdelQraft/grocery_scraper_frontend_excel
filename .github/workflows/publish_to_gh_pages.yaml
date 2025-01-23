@@ -1,0 +1,30 @@
+name: Publish the Excel Frontend Application as to GitHub Pages
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # no backend service available at the moment, so only provide a local one
+      - name: Build the Excel Frontend Application
+        run:
+          cp ./.env.prod.template ./.env.prod &&
+          npm i &&
+          mkdir gh_pages &&
+          FRONTEND_URL=https://adelqraft.github.io/grocery_scraper_frontend_excel/add-in BACKEND_URL=https://httpbin.org/status/503 npm run build &&
+          mv dist_prod gh_pages/add-in &&
+          FRONTEND_URL=https://adelqraft.github.io/grocery_scraper_frontend_excel/add-in-local BACKEND_URL=localhost npm run build &&
+          mv dist_prod gh_pages/add-in-local
+
+      - name: Push the Docker Image to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+        with:
+          dir: gh_pages
+          branch: production-deployment
+          token: ${{secrets.GH_REPOS_PAT}}

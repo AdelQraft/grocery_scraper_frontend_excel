@@ -10,7 +10,6 @@
 		"build": "webpack --mode production",
 		"build:dev": "webpack --mode development",
 		"clean": "dotenv -e .env.dev -- cross-var rimraf %DIST_DIR% && dotenv -e .env.prod -- cross-var rimraf %DIST_DIR%",
-		"aaaaa": "cmd.exe /c wsl rm -rf /mnt/c/Users/Adel/AppData/Local/Microsoft/Office/16.0/Wef/*",
 		"dev-server": "webpack serve --mode development",
 		"docker-build": "npm run build && dotenv -e .env.prod -v DIST_DIR=.dist_prod_template.tmp -v FRONTEND_URL=PLACEHOLDER___FRONTEND_URL___PLACEHOLDER -v BACKEND_URL=PLACEHOLDER___BACKEND_URL___PLACEHOLDER -- npm run build && dotenv -e .env.prod -- cross-var docker build -t %DOCKER_IMAGE_NAME%:%VERSION% -f build.docker --build-arg DIST_DIR=%DIST_DIR% --build-arg TEMPLATE_DIST_DIR=.dist_prod_template.tmp . && rimraf .dist_prod_template.tmp",
 		"docker-force-remove": "npm run docker-stop && dotenv -e .env.prod -- cross-var node build_utility/ignore_exit_value.js docker container rm %DOCKER_CONTAINER_NAME%",
