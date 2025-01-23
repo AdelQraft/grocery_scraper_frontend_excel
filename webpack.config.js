@@ -18,6 +18,8 @@ module.exports = async (env, options) => {
 	const envFilePath = options.mode === "development" ? ".env.dev" : ".env.prod"
 	require("dotenv").config({ path: envFilePath })
 
+	console.log(process.env.ENVIRONMENT_DEFINITION_URL)
+
 	return {
 		devtool: "source-map",
 		entry: {
