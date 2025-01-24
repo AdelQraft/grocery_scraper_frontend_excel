@@ -19,17 +19,6 @@ export class Functions {
 	}
 	*/
 
-	private static _INFO_PARAM_NAME_ALLOWED_VALUES = new Set([
-		"name",
-		"url",
-		"price-in-local-currency-slc",
-		"count-id",
-		"mass-g",
-		"volume-L",
-		"protein-mass-g",
-		"energy-Cal"
-	])
-
 	private static _instance: Functions
 
 	private _item_endpoint_url: string
@@ -39,10 +28,6 @@ export class Functions {
 			INVALID_VALUE: new CustomFunctions.Error(CustomFunctions.ErrorCode.invalidValue),
 			NOT_AVAILABLE: new CustomFunctions.Error(CustomFunctions.ErrorCode.notAvailable)
 		}
-	}
-
-	private static _singleInfoIsValid(singleInfo: string) {
-		return Functions._INFO_PARAM_NAME_ALLOWED_VALUES.has(singleInfo)
 	}
 
 	static get instance() {
@@ -80,24 +65,15 @@ export class Functions {
 		if (massToVolumeRatio) reqParams.append("mass-to-volume-ratio", massToVolumeRatio)
 		if (infoToRetrieve) {
 			infoToRetrieveSplit = infoToRetrieve.split(",").map((value) => { return value.trim() })
-			for (const singleInfo of infoToRetrieveSplit) {
-				if (!Functions._singleInfoIsValid(singleInfo)) {
-					invocation.setResult(Functions._ExcelFunctionError.INVALID_VALUE)
-					return
-				}
-
-				reqParams.append("info", singleInfo)
-			}
 		} else {
 			infoToRetrieveSplit = [
 				"price-in-local-currency-slc",
 				"protein-mass-g",
 				"energy-Cal",
 			]
-			for (const singleInfo of infoToRetrieveSplit) {
-				reqParams.append("info", singleInfo)
-			}
-
+		}
+		for (const singleInfo of infoToRetrieveSplit) {
+			reqParams.append("info", singleInfo)
 		}
 		reqParams.append(refQuantityKind, refQuantity)
 
