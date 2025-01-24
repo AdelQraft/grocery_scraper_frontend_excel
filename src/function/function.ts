@@ -12,9 +12,10 @@ async function waitUntilEnvironmentIsLoaded() {
  * @param url The URL of the product, from a known supermarket.
  * @param refQuantity The (reference) quantity of the product, possibly with its units. Standard units apply. standard multipliers are denoted by square brackets.
  * @param refQuantityKind The kind of the (reference) quantity. Valid values are: price-in-local-currency, count, mass, volume, protein-mass, energy.
- * @param [infoToRetrieve] The information to retrieve, comma-separated, in order. Valid values are: price-in-local-currency-slc, count-id, mass-g, volume-L, protein-mass-g, energy-Cal.
+ * @param [nutritionFactsFallbackSearchQuery] The search query for the nutrition facts if they are not found after looking up with the item code.
  * @param [massToVolumeRatio] The ratio of mass to volume with its units. Standard units apply. standard multipliers are denoted by square brackets.
  * @param [massToCountRatio] The ratio of mass to count with its units. Standard units apply. standard multipliers are denoted by square brackets.
+ * @param [infoToRetrieve] The information to retrieve, comma-separated, in order. Valid values are: price-in-local-currency-slc, count-id, mass-g, volume-L, protein-mass-g, energy-Cal.
  * @param [makePriceNegative] Make the price negative.
  * @param invocation The custom function handler.
  * @returns Information about the product in the specified information order.
@@ -23,6 +24,7 @@ export function getInfoFromUrl(
 	url: string,
 	refQuantity: string,
 	refQuantityKind: string,
+	nutritionFactsFallbackSearchQuery: string,
 	massToCountRatio: string,
 	massToVolumeRatio: string,
 	infoToRetrieve: string,
@@ -34,6 +36,7 @@ export function getInfoFromUrl(
 			url,
 			refQuantity,
 			refQuantityKind,
+			nutritionFactsFallbackSearchQuery,
 			massToCountRatio,
 			massToVolumeRatio,
 			infoToRetrieve,

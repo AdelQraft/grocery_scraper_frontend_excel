@@ -50,6 +50,7 @@ export class Functions {
 		url: string,
 		refQuantity: string,
 		refQuantityKind: string,
+		nutritionFactsFallbackSearchQuery: string,
 		massToCountRatio: string,
 		massToVolumeRatio: string,
 		infoToRetrieve: string,
@@ -80,6 +81,10 @@ export class Functions {
 			reqParams.append("info", singleInfo)
 		}
 		reqParams.append(refQuantityKind, refQuantity)
+
+		if (nutritionFactsFallbackSearchQuery !== null) {
+			reqParams.append("nutrition-facts-fallback-search-query", nutritionFactsFallbackSearchQuery)
+		}
 
 		if (makePriceNegative == null) makePriceNegative = false
 
