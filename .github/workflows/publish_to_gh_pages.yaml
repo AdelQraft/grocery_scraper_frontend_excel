@@ -16,6 +16,7 @@ jobs:
         run:
           cp ./.env.dev.template ./.env.dev &&
           npm i &&
+          ls -l --color=auto &&
           mkdir gh_pages &&
           FRONTEND_URL="https://adelqraft.github.io/grocery_scraper_frontend_excel/add-in" BACKEND_URL="https://httpbin.org/status/503" ENVIRONMENT_DEFINITION_URL="/grocery_scraper_frontend_excel/add-in/env_def.json" npm run build:dev &&
           ls -l --color=auto &&
