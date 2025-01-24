@@ -1,7 +1,8 @@
 name: Publish the Excel Frontend Application to GitHub Pages
 
 on:
-  push:
+  - workflow_dispatch
+  - push:
     branches:
       - production
 
