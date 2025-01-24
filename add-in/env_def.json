@@ -1,3 +1,1 @@
-{
-	"backendUrl": "https://httpbin.org/status/503"
-}
+{"backendUrl":"https://httpbin.org/status/503"}
