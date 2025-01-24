@@ -17,6 +17,8 @@ export class Environment {
 			})
 		}
 
+		console.log(Environment._instance)
+
 		return Environment._instance
 	}
 }
