@@ -104,9 +104,14 @@ var Functions = /*#__PURE__*/function () {
     };
   }
   return _createClass(Functions, [{
+    key: "itemEndpointUrl",
+    get: function get() {
+      return this._itemEndpointUrl;
+    }
+  }, {
     key: "backendUrl",
     set: function set(url) {
-      this._item_endpoint_url = url + "/v1/item";
+      this._itemEndpointUrl = url + "/v1/item";
     }
   }, {
     key: "getInfoFromUrl",
@@ -145,7 +150,7 @@ var Functions = /*#__PURE__*/function () {
       var timeoutID;
       var that = this;
       (function callApi() {
-        axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(that._item_endpoint_url + '?' + reqParams.toString(), {
+        axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(that._itemEndpointUrl + '?' + reqParams.toString(), {
           timeout: 0
         }).then(function (resp) {
           var info = new _product_info__WEBPACK_IMPORTED_MODULE_0__.ProductInfo(resp.data);
@@ -222,6 +227,28 @@ var ProductInfo = /*#__PURE__*/function () {
     }
   }]);
 }();
+
+/***/ }),
+
+/***/ "./src/utility.ts":
+/*!************************!*\
+  !*** ./src/utility.ts ***!
+  \************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   waitUntil: function() { return /* binding */ waitUntil; }
+/* harmony export */ });
+function waitUntil(isOk) {
+  var timeout_ms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+  function poll(resolve) {
+    if (isOk()) resolve();else setTimeout(function () {
+      return poll(resolve);
+    }, timeout_ms);
+  }
+  return new Promise(poll);
+}
 
 /***/ }),
 
@@ -5024,6 +5051,7 @@ const asap = typeof queueMicrotask !== 'undefined' ?
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	__webpack_require__("./src/utility.ts");
 /******/ 	__webpack_require__("./src/environment.ts");
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/function/functions.ts");
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
