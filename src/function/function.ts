@@ -1,4 +1,9 @@
 import {Functions} from "./functions";
+import {waitUntil} from "../utility";
+
+async function waitUntilEnvironmentIsLoaded() {
+	await waitUntil(() => !!Functions.instance.itemEndpointUrl)
+}
 
 // noinspection JSUnusedGlobalSymbols
 /**
@@ -24,14 +29,16 @@ export function getInfoFromUrl(
 	makePriceNegative: boolean,
 	invocation: CustomFunctions.StreamingInvocation<number[][]>
 ): void {
-	Functions.instance.getInfoFromUrl(
-		url,
-		refQuantity,
-		refQuantityKind,
-		massToCountRatio,
-		massToVolumeRatio,
-		infoToRetrieve,
-		makePriceNegative,
-		invocation
-	)
+	waitUntilEnvironmentIsLoaded().then(() => {
+		Functions.instance.getInfoFromUrl(
+			url,
+			refQuantity,
+			refQuantityKind,
+			massToCountRatio,
+			massToVolumeRatio,
+			infoToRetrieve,
+			makePriceNegative,
+			invocation
+		)
+	})
 }

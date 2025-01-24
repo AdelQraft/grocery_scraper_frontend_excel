@@ -28,6 +28,7 @@ module.exports = async (env, options) => {
 				"regenerator-runtime/runtime"
 			],
 			common: [
+				"./src/utility.ts",
 				"./src/environment.ts",
 				"./src/function/functions.ts"
 			],

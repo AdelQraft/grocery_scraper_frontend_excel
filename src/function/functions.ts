@@ -21,7 +21,7 @@ export class Functions {
 
 	private static _instance: Functions
 
-	private _item_endpoint_url: string
+	private _itemEndpointUrl: string
 
 	private constructor() {
 		Functions._ExcelFunctionError = {
@@ -38,8 +38,12 @@ export class Functions {
 
 	refreshPeriod_s: () => number
 
+	get itemEndpointUrl(): string {
+		return this._itemEndpointUrl
+	}
+
 	set backendUrl(url: string) {
-		this._item_endpoint_url = url + "/v1/item"
+		this._itemEndpointUrl = url + "/v1/item"
 	}
 
 	getInfoFromUrl(
@@ -82,7 +86,7 @@ export class Functions {
 		let timeoutID: NodeJS.Timeout
 		let that = this;
 		(function callApi() {
-			axios.get(that._item_endpoint_url + '?' + reqParams.toString(), { timeout: 0 })
+			axios.get(that._itemEndpointUrl + '?' + reqParams.toString(), { timeout: 0 })
 				.then((resp: { data: any }) => {
 					const info = new ProductInfo(resp.data)
 					invocation.setResult([infoToRetrieveSplit.map((infoName) => {
