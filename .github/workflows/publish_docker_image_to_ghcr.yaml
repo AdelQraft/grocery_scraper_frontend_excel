@@ -1,6 +1,7 @@
 name: Publish the Excel Frontend Application as Docker Image to GHCR
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - production
