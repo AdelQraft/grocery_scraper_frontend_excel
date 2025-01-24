@@ -25,6 +25,12 @@
                     "type": "string"
                 },
                 {
+                    "description": "The search query for the nutrition facts if they are not found after looking up with the item code.",
+                    "name": "nutritionFactsFallbackSearchQuery",
+                    "optional": true,
+                    "type": "string"
+                },
+                {
                     "description": "The ratio of mass to count with its units. Standard units apply. standard multipliers are denoted by square brackets.",
                     "name": "massToCountRatio",
                     "optional": true,
