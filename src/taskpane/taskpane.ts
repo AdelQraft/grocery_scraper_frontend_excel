@@ -1,7 +1,8 @@
 import {Functions} from "../function/functions";
 import {Environment} from "../environment";
 
-const DEFAULT_REFRESH_PERIOD_S = 600
+const DEFAULT_REFRESH_PERIOD_s = 600
+const DEFAULT_RETRY_PERIOD_ms = 20000
 
 let _refreshPeriodTextField: HTMLInputElement
 let _saveRefreshPeriodToWBChkBx: HTMLInputElement
@@ -19,11 +20,12 @@ Office.onReady(async () => {
 	await Environment.getInstancePromise().then((env) => {
 		Functions.instance.backendUrl = env.backendUrl
 	})
-	Functions.instance.refreshPeriod_s = () => parseInt(_refreshPeriodTextField.value)
+	Functions.instance.refreshPeriod_ms = () => 1000 * parseInt(_refreshPeriodTextField.value)
+	Functions.instance.retryPeriod_ms = () => DEFAULT_RETRY_PERIOD_ms
 
 	await Excel.run(async () => {
 		const exists = await excelLoadGroceryScraperRefreshPeriod()
-		if (!exists) _refreshPeriodTextField.value = DEFAULT_REFRESH_PERIOD_S.toString()
+		if (!exists) _refreshPeriodTextField.value = DEFAULT_REFRESH_PERIOD_s.toString()
 	})
 })
 

@@ -36,7 +36,9 @@ export class Functions {
 		return Functions._instance
 	}
 
-	refreshPeriod_s: () => number
+	refreshPeriod_ms: () => number
+
+	retryPeriod_ms: () => number
 
 	get itemEndpointUrl(): string {
 		return this._itemEndpointUrl
@@ -100,6 +102,8 @@ export class Functions {
 
 						return singleInfo
 					})])
+
+					timeoutID = setTimeout(callApi, that.refreshPeriod_ms())
 				})
 				.catch((err) => {
 					if (err.response && err.response.status === 400 /* bad request */) {
@@ -108,10 +112,8 @@ export class Functions {
 						invocation.setResult(Functions._ExcelFunctionError.NOT_AVAILABLE)
 					}
 
-					return
+					timeoutID = setTimeout(callApi, that.retryPeriod_ms())
 				})
-
-			timeoutID = setTimeout(callApi, 1000 * that.refreshPeriod_s())
 		})()
 
 		invocation.onCanceled = () => {
